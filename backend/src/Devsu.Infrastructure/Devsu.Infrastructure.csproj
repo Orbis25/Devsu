@@ -6,4 +6,19 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Devsu.Application\Devsu.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+        <HintPath>..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\9.0.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.3" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.3" />
+    </ItemGroup>
+
 </Project>
