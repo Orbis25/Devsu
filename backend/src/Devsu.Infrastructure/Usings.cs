@@ -1,0 +1,13 @@
+﻿global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.OpenApi.Models;
+global using Devsu.Infrastructure.EF.Configurations.Core;
+global using Domain.Models;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Devsu.Infrastructure.EF.Persistence;
+global using Domain.Options;
+global using Microsoft.AspNetCore.Cors.Infrastructure;
+global using Devsu.Application.Repositories;
+global using Devsu.Infrastructure.EF.Repositories.Core;
