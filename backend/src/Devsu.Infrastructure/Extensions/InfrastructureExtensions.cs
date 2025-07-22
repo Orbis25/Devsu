@@ -1,3 +1,13 @@
+using System.Reflection;
+using Devsu.Application.Mappers;
+using Devsu.Application.Services.Users;
+using Devsu.Application.Validators.Users;
+using Devsu.Infrastructure.EF.Repositories;
+using FluentValidation;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+
 namespace Devsu.Infrastructure.Extensions;
 
 public static class InfrastructureExtensions
@@ -11,10 +21,11 @@ public static class InfrastructureExtensions
         services.AddPersistence(configuration)
             .AddConfigOptions(configuration)
             .AddCorsWithConfiguration(configuration)
+            .AddValidators()
             .AddRepositories()
-            .AddServices();
-
-
+            .AddServices()
+            .AddAutoMapper(typeof(UserMapper).Assembly);
+        
         return services;
     }
 
@@ -34,6 +45,15 @@ public static class InfrastructureExtensions
             opt.EnableSensitiveDataLogging(false)
                 .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Warning);
         });
+
+        return services;
+    }
+    
+    private static IServiceCollection AddValidators(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
+        services.AddFluentValidationAutoValidation();
+        services.AddFluentValidationRulesToSwagger();
 
         return services;
     }
@@ -66,11 +86,13 @@ public static class InfrastructureExtensions
 
     private static IServiceCollection AddServices(this IServiceCollection service)
     {
+        service.AddScoped<IUserService, UserService>();
         return service;
     }
     
     private static IServiceCollection AddRepositories(this IServiceCollection service)
     {
+        service.AddScoped<IUserRepository, UserRepository>();
         return service;
     }
 
