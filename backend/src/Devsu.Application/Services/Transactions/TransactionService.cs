@@ -1,6 +1,7 @@
 using Devsu.Application.Dtos.Transactions;
 using Devsu.Application.Extensions;
 using Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Devsu.Application.Services.Transactions;
 
@@ -18,7 +19,6 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
         _accountRepository = accountRepository;
     }
 
-
     public async Task<Response<Guid>> CreateAsync(CreateTransaction input, CancellationToken cancellationToken)
     {
         try
@@ -33,27 +33,44 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
                 return new("Account not found") { IsNotFound = true };
             }
 
-            if (account.CurrentBalance <= 0 && input.Type.ToLowerInvariant() == TransactionType.Debit.GetDisplay())
+            var isDebit = input.Type.ToLowerInvariant() == TransactionType.Debit.GetDisplay();
+
+            //if is a debit transaction, check if the account has sufficient balance
+            if (account.CurrentBalance <= 0 && isDebit)
             {
                 _logger.LogWarning("Account with Id {AccountId} has insufficient balance", input.AccountId);
                 return new("Saldo no disponible");
             }
 
-            var isDebitTransaction = input.Type.ToLowerInvariant() == TransactionType.Debit.GetDisplay();
+            if (isDebit)
+            {
+                var (limitMessage, limitResult) = CanCreateTransaction(input, account);
+
+                if (!limitResult)
+                {
+                    _logger.LogWarning("User with AccountId {AccountId} has exceeded transaction limits: {Message}",
+                        account.Id,
+                        limitMessage);
+                    return new(limitMessage);
+                }
+            }
+
+
             var data = new Transaction
             {
                 AccountId = account.Id,
                 Amount = input.Amount,
                 Type = input.Type.ToLowerInvariant(),
                 CurrentBalance = account.CurrentBalance,
-                Movement = isDebitTransaction ?  $"Retiro de {input.Amount}" 
-                                               : $"Deposito de {input.Amount}",
+                Movement = isDebit
+                    ? $"Retiro de {input.Amount}"
+                    : $"Deposito de {input.Amount}",
             };
 
             var result = _repository.Attach(data);
 
             // Update the account's current balance based on the transaction type
-            switch (isDebitTransaction)
+            switch (isDebit)
             {
                 case false:
                     account.CurrentBalance += input.Amount;
@@ -96,8 +113,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
                 _logger.LogWarning("Transaction with Id {Id} not found", id);
                 return new() { Message = "Transaction no encontrada", IsNotFound = true };
             }
-            
-                      
+
             // handler transaction reversal if the type or amount has changed
             await TransactionHandlerAsync(input, transaction, cancellationToken).ConfigureAwait(false);
 
@@ -107,10 +123,10 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
             transaction.Movement = input.Type.ToLowerInvariant() == TransactionType.Debit.GetDisplay()
                 ? $"Retiro de {input.Amount}"
                 : $"Deposito de {input.Amount}";
-  
+
 
             _repository.Attach(transaction);
-            
+
             // Apply changes
             await _repository.CommitAsync(cancellationToken).ConfigureAwait(false);
 
@@ -129,63 +145,88 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
         {
             //update the account balance before removing the transaction
             var transaction = await _repository.GetOneAsync(x => x.Id == id, cancellationToken);
-            
+
             if (transaction == null)
             {
                 _logger.LogWarning("Transaction with Id {Id} not found", id);
                 return new() { Message = "Transaction no encontrada", IsNotFound = true };
             }
-            
+
             // Reverse the transaction amount from the account
             await ApplyUpdateToAccountAsync(transaction.AccountId!.Value, transaction, true, cancellationToken)
                 .ConfigureAwait(false);
 
-           await _accountRepository.CommitAsync(cancellationToken).ConfigureAwait(false);
+            await _accountRepository.CommitAsync(cancellationToken).ConfigureAwait(false);
 
-           return await base.RemoveAsync(id, cancellationToken);
+            return await base.RemoveAsync(id, cancellationToken);
         }
         catch (Exception e)
         {
             _logger.LogError(e, "Error removing transaction: {Message}", e.Message);
-            return new(){ Message = "Error removing transaction" };
+            return new() { Message = "Error removing transaction" };
         }
-        
     }
 
-    private async Task TransactionHandlerAsync(EditTransaction edit, Transaction transaction, CancellationToken cancellationToken)
+    private async Task TransactionHandlerAsync(EditTransaction edit, Transaction transaction,
+        CancellationToken cancellationToken)
     {
         _logger.LogInformation("Reversing transaction with Id {Id}", transaction.Id);
-        
-        if(edit.Type == transaction.Type && edit.Amount == transaction.Amount && edit.AccountId == transaction.AccountId)
+
+        if (edit.Type == transaction.Type && edit.Amount == transaction.Amount &&
+            edit.AccountId == transaction.AccountId)
         {
-            _logger.LogInformation("No changes detected for transaction with Id {Id}, skipping reversal", transaction.Id);
+            _logger.LogInformation("No changes detected for transaction with Id {Id}, skipping reversal",
+                transaction.Id);
             return;
         }
-        
-        var account = await _accountRepository.GetOneAsync(x => x.Id == edit.AccountId, cancellationToken);
 
-        if (account == null)
+        var accountNew = await _accountRepository.GetOneAsync(x => x.Id == edit.AccountId, cancellationToken);
+
+        if (accountNew == null)
         {
             _logger.LogWarning("Account with Id {AccountId} not found", transaction.AccountId);
             return;
         }
-        
+
         if (edit.AccountId != transaction.AccountId)
         {
-            await ApplyUpdateToAccountAsync(edit.AccountId, transaction, false, cancellationToken).ConfigureAwait(false);
-            await ApplyUpdateToAccountAsync(transaction.AccountId!.Value, transaction,true, cancellationToken).ConfigureAwait(false);
-            return;
+            await ApplyUpdateToAccountAsync(edit.AccountId, transaction, false, cancellationToken)
+                .ConfigureAwait(false);
+            await ApplyUpdateToAccountAsync(transaction.AccountId!.Value, transaction, true, cancellationToken)
+                .ConfigureAwait(false);
         }
-        
-        ApplyTransactionReversal(account, transaction);
-        ApplyTransaction(edit, account);
+        else
+        {
+            ApplyTransactionReversal(accountNew, transaction);
+            ApplyTransaction(edit, accountNew);
 
-        // Update the account balance
-        _accountRepository.Attach(account);
+            // Update the account balance
+            _accountRepository.Attach(accountNew);
+        }
+
+        // Reverse the user limit if the transaction type is debit
+        var isDebit = transaction.Type!.ToLowerInvariant() == TransactionType.Debit.GetDisplay();
+        if (isDebit && accountNew.Id != transaction.AccountId)
+        {
+            var oldAccount = await _accountRepository.GetOneAsync(x => x.Id == transaction.AccountId, cancellationToken)
+                .ConfigureAwait(false);
+
+            if (oldAccount is not null)
+            {
+                ReverseAccountLimit(oldAccount, transaction);
+            }
+
+            ApplyAccountLimit(accountNew, edit);
+        }
+        else if(isDebit)
+        {
+            ReverseAccountLimit(accountNew, transaction);
+            ApplyAccountLimit(accountNew, edit);
+        }
     }
-    
-    private async Task ApplyUpdateToAccountAsync(Guid accountId, 
-        Transaction transaction, 
+
+    private async Task ApplyUpdateToAccountAsync(Guid accountId,
+        Transaction transaction,
         bool isReversal = false,
         CancellationToken cancellationToken = default)
     {
@@ -224,8 +265,8 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
         // Update the new account balance
         _accountRepository.Attach(newAccount);
     }
-    
-    
+
+
     private static void ApplyTransaction(EditTransaction edit, Account account)
     {
         if (edit.Type!.ToLowerInvariant() == TransactionType.Credit.GetDisplay())
@@ -240,5 +281,53 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
             account.CurrentBalance -= transaction.Amount;
         else if (transaction.Type.ToLowerInvariant() == TransactionType.Debit.GetDisplay())
             account.CurrentBalance += transaction.Amount;
+    }
+
+    private (string, bool) CanCreateTransaction(CreateTransaction transaction, Account account)
+    {
+        //check daily transaction limit
+        if (transaction.Amount > account.DailyDebitLimit)
+        {
+            _logger.LogWarning("User with AccountId {AccountId} has exceeded daily debit limit", account.Id);
+            return ("Cupo diario Excedido", false);
+        }
+
+        var consumedToday = account.DailyDebit + transaction.Amount;
+        //check if the user has exceeded the daily debit limit after the transaction
+        if (consumedToday > account.DailyDebitLimit)
+        {
+            _logger.LogWarning("User with AccountId {AccountId} has exceeded daily debit limit after transaction",
+                account.Id);
+
+            var current = account.DailyDebitLimit - account.DailyDebit;
+            var msg = "Cupo diario Excedido";
+
+            if (current > 0)
+            {
+                msg = $"Cupo diario Excedido, solo tiene permitido retirar {current}";
+            }
+
+            return (msg, false);
+        }
+
+        //update the user's daily debit limit
+
+        account.DailyDebit += transaction.Amount;
+
+        _accountRepository.Attach(account);
+
+        return (string.Empty, true);
+    }
+
+    private void ApplyAccountLimit(Account account, EditTransaction transaction)
+    {
+        account.DailyDebit += transaction.Amount;
+        _accountRepository.Attach(account);
+    }
+
+    private void ReverseAccountLimit(Account account, Transaction transaction)
+    {
+        account.DailyDebit -= transaction.Amount;
+        _accountRepository.Attach(account);
     }
 }

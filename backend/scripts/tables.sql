@@ -1,10 +1,13 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE Users (
+CREATE TABLE "Users" (
     "Id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     "Name" TEXT NOT NULL,
     "Gender" TEXT,
     "Age" INT,
+    "DailyDebitLimit" NUMERIC(18, 2),
+    "DailyDebit" NUMERIC(18,2),
+    "LastDailyDebitUpdated" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "Identification" TEXT,
     "Address" TEXT,
     "Phone" TEXT,
@@ -16,7 +19,7 @@ CREATE TABLE Users (
 );
 
 
-CREATE TABLE Accounts (
+CREATE TABLE "Accounts" (
     "Id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     "AccountNumber" TEXT NOT NULL,
     "AccountType" TEXT,
@@ -26,10 +29,10 @@ CREATE TABLE Accounts (
     "UserId" UUID NOT NULL,
     "CreatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "IsDeleted" BOOLEAN DEFAULT FALSE,
-   FOREIGN KEY ("UserId") REFERENCES Users("Id") ON DELETE CASCADE
+   FOREIGN KEY ("UserId") REFERENCES "Users"("Id") ON DELETE CASCADE
    );
 
-CREATE TABLE Transactions (
+CREATE TABLE "Transactions" (
     "Id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     "Type" TEXT,
     "CurrentBalance" NUMERIC(18, 2),
@@ -39,5 +42,5 @@ CREATE TABLE Transactions (
     "AccountId" UUID NOT NULL,
     "CreatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "IsDeleted" BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY ("AccountId") REFERENCES Accounts("Id") ON DELETE CASCADE
+    FOREIGN KEY ("AccountId") REFERENCES "Accounts"("Id") ON DELETE CASCADE
 );

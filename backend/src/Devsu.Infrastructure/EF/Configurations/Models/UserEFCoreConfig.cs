@@ -4,7 +4,7 @@ public class UserEFCoreConfig : EFCoreConfiguration<User>
 {
     public override void ConfigureEF(EntityTypeBuilder<User> builder)
     {
-        builder.ToTable("users");
+        builder.ToTable("Users");
         builder.HasIndex(x => x.ClientId);
         builder.Property(x => x.Name).IsRequired();
         builder.Property(x => x.Age).IsRequired();
