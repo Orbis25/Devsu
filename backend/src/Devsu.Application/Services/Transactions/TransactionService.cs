@@ -1,5 +1,7 @@
 using Devsu.Application.Dtos.Transactions;
 using Devsu.Application.Extensions;
+using Devsu.Application.Resources;
+using Devsu.Application.Services.Core.Pdf;
 using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,13 +12,15 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
     private readonly ITransactionRepository _repository;
     private readonly IAccountRepository _accountRepository;
     private readonly ILogger<TransactionService> _logger;
+    private readonly IPdfService _pdfService;
 
     public TransactionService(ITransactionRepository repository, IMapper mapper, ILogger<TransactionService> logger,
-        IAccountRepository accountRepository) : base(repository, mapper, logger)
+        IAccountRepository accountRepository, IPdfService pdfService) : base(repository, mapper, logger)
     {
         _repository = repository;
         _logger = logger;
         _accountRepository = accountRepository;
+        _pdfService = pdfService;
     }
 
     public async Task<Response<Guid>> CreateAsync(CreateTransaction input, CancellationToken cancellationToken)
@@ -191,6 +195,15 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
         }
     }
 
+
+    public Response<string>? ExportTransactionReport()
+    {
+        return new()
+        {
+            Data = _pdfService.GeneratePdfAsBase64(HtmlResources.TransactionsHtml)
+        };
+    }
+    
     private async Task TransactionHandlerAsync(EditTransaction edit, Transaction transaction,
         CancellationToken cancellationToken)
     {

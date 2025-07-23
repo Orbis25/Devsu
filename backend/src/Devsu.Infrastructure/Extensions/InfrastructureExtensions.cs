@@ -1,4 +1,5 @@
 
+using Devsu.Application.Services.Core.Pdf;
 using Devsu.Application.Services.Transactions;
 
 namespace Devsu.Infrastructure.Extensions;
@@ -17,6 +18,7 @@ public static class InfrastructureExtensions
             .AddValidators()
             .AddRepositories()
             .AddServices()
+            .ConfigurePdf()
             .AddAutoMapper(typeof(UserMapper).Assembly);
         
         return services;
@@ -27,6 +29,12 @@ public static class InfrastructureExtensions
         app.UseHttpsRedirection();
         app.UseCors();
         return app;
+    }
+
+    private static IServiceCollection ConfigurePdf(this IServiceCollection services)
+    {
+        services.AddScoped<IPdfService, PdfService>();
+        return services;
     }
 
     private static IServiceCollection AddPersistence(this IServiceCollection services,

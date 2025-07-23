@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=Devsu;Username=postgress;Password=postgress"
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: Devsu
+      POSTGRES_USER: postgress
+      POSTGRES_PASSWORD: postgress
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
