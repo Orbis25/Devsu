@@ -44,7 +44,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
             if (isDebit)
             {
-                var (limitMessage, limitResult) = CanCreateTransaction(input, account);
+                var (limitMessage, limitResult) = CanCreateOrUpdateTransaction(input, account);
 
                 if (!limitResult)
                 {
@@ -98,9 +98,9 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
         try
         {
             _logger.LogInformation("Updating account with id {Id}", id);
-            var account = await _accountRepository.ExistAsync(x => x.Id == input.AccountId, cancellationToken);
+            var account = await _accountRepository.GetOneAsync(x => x.Id == input.AccountId, cancellationToken);
 
-            if (!account)
+            if (account is null)
             {
                 _logger.LogWarning("Account with Id {Id} not found", id);
                 return new() { Message = "Account no encontrada", IsNotFound = true };
@@ -113,6 +113,30 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
                 _logger.LogWarning("Transaction with Id {Id} not found", id);
                 return new() { Message = "Transaction no encontrada", IsNotFound = true };
             }
+
+
+            var isDebit = input.Type.ToLowerInvariant() == TransactionType.Debit.GetDisplay();
+
+            if (isDebit)
+            {
+                var trx = new CreateTransaction
+                {
+                    Amount = input.Amount - transaction.Amount,
+                    Type = input.Type,
+                    AccountId = input.AccountId
+                };
+
+                var (limitMessage, limitResult) = CanCreateOrUpdateTransaction(trx, account!,false);
+
+                if (!limitResult)
+                {
+                    _logger.LogWarning("User with AccountId {AccountId} has exceeded transaction limits: {Message}",
+                        account!.Id,
+                        limitMessage);
+                    return new() { Message = limitMessage };
+                }
+            }
+
 
             // handler transaction reversal if the type or amount has changed
             await TransactionHandlerAsync(input, transaction, cancellationToken).ConfigureAwait(false);
@@ -218,7 +242,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
             ApplyAccountLimit(accountNew, edit);
         }
-        else if(isDebit)
+        else if (isDebit)
         {
             ReverseAccountLimit(accountNew, transaction);
             ApplyAccountLimit(accountNew, edit);
@@ -283,7 +307,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
             account.CurrentBalance += transaction.Amount;
     }
 
-    private (string, bool) CanCreateTransaction(CreateTransaction transaction, Account account)
+    private (string, bool) CanCreateOrUpdateTransaction(CreateTransaction transaction, Account account, bool isCreate = true)
     {
         //check daily transaction limit
         if (transaction.Amount > account.DailyDebitLimit)
@@ -309,17 +333,16 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
             return (msg, false);
         }
-
-        //update the user's daily debit limit
-
-        account.DailyDebit += transaction.Amount;
-
-        _accountRepository.Attach(account);
-
+        
+        if (isCreate)
+        {
+            ApplyAccountLimit(account, transaction);
+        }
+        
         return (string.Empty, true);
     }
-
-    private void ApplyAccountLimit(Account account, EditTransaction transaction)
+    
+    private void ApplyAccountLimit(Account account, CreateTransaction transaction)
     {
         account.DailyDebit += transaction.Amount;
         _accountRepository.Attach(account);
