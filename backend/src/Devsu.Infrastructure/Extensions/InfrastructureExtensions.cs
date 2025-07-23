@@ -1,12 +1,5 @@
-using System.Reflection;
-using Devsu.Application.Mappers;
-using Devsu.Application.Services.Users;
-using Devsu.Application.Validators.Users;
-using Devsu.Infrastructure.EF.Repositories;
-using FluentValidation;
-using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Identity;
-using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+
+using Devsu.Application.Services.Transactions;
 
 namespace Devsu.Infrastructure.Extensions;
 
@@ -87,12 +80,16 @@ public static class InfrastructureExtensions
     private static IServiceCollection AddServices(this IServiceCollection service)
     {
         service.AddScoped<IUserService, UserService>();
+        service.AddScoped<IAccountService, AccountService>();
+        service.AddScoped<ITransactionService, TransactionService>();
         return service;
     }
     
     private static IServiceCollection AddRepositories(this IServiceCollection service)
     {
         service.AddScoped<IUserRepository, UserRepository>();
+        service.AddScoped<IAccountRepository, AccountRepository>();
+        service.AddScoped<ITransactionRepository, TransactionRepository>();
         return service;
     }
 

@@ -5,10 +5,7 @@ public class TransactionsEFCoreConfig : EFCoreConfiguration<Transaction>
     public override void ConfigureEF(EntityTypeBuilder<Transaction> builder)
     {
         builder.ToTable("transactions");
-        builder.HasIndex(x => x.AccountNumber);
         builder.HasIndex(x => x.Type);
-        builder.Property(x => x.AccountNumber).IsRequired();
-        builder.Property(x => x.InitialBalance).IsRequired();
         builder.Property(x => x.CurrentBalance).IsRequired();
         builder.Property(x => x.Amount).IsRequired();
         

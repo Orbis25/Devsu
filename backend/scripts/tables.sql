@@ -31,14 +31,11 @@ CREATE TABLE Accounts (
 
 CREATE TABLE Transactions (
     "Id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    "AccountNumber" TEXT NOT NULL,
     "Type" TEXT,
-    "InitialBalance" NUMERIC(18, 2),
     "CurrentBalance" NUMERIC(18, 2),
     "Amount" NUMERIC(18, 2),
     "Status" BOOLEAN DEFAULT TRUE,
     "Movement" TEXT,
-    "IsCredit" BOOLEAN DEFAULT FALSE,
     "AccountId" UUID NOT NULL,
     "CreatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "IsDeleted" BOOLEAN DEFAULT FALSE,

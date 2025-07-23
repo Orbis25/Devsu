@@ -8,3 +8,4 @@ global using Devsu.Application.Dtos.Users;
 global using Devsu.Application.Repositories;
 global using Microsoft.Extensions.Logging;
 global using FluentValidation;
+global using Devsu.Application.Services.Core;

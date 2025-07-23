@@ -24,6 +24,12 @@ public abstract class BaseRepository<TContext, TModel> : IBaseRepository<TModel>
         return model;
     }
 
+    public TModel Attach(TModel model)
+    {
+        _context.Attach(model);
+        return model;
+    }
+
     public virtual IQueryable<TModel> GetAll(Expression<Func<TModel, bool>>? expression = default)
     {
         var results = _context.Set<TModel>().AsQueryable();
@@ -98,5 +104,10 @@ public abstract class BaseRepository<TContext, TModel> : IBaseRepository<TModel>
     public Task<TModel?> GetOneAsync(Expression<Func<TModel, bool>> expression, CancellationToken cancellationToken = default)
     {
         return _context.Set<TModel>().FirstOrDefaultAsync(expression, cancellationToken);
+    }
+
+    public async Task CommitAsync(CancellationToken cancellationToken = default)
+    {
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

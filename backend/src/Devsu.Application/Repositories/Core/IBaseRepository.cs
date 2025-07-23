@@ -12,8 +12,10 @@ public interface IBaseRepository<TModel>
         CancellationToken cancellationToken = default);
     IQueryable<TModel> GetAll(Expression<Func<TModel, bool>>? expression = default);
     Task<TModel> CreateAsync(TModel model, CancellationToken cancellationToken = default);
+    TModel Attach(TModel model);
     Task<TModel?> UpdateAsync(TModel model, CancellationToken cancellationToken = default);
     Task<bool> SoftRemoveAsync(Guid id, CancellationToken cancellationToken = default);
     Task<bool> ExistAsync(Expression<Func<TModel, bool>>? expression = default, CancellationToken cancellationToken = default);
     Task<TModel?> GetOneAsync(Expression<Func<TModel, bool>> expression, CancellationToken cancellationToken = default);
+    Task CommitAsync(CancellationToken cancellationToken = default);
 }
