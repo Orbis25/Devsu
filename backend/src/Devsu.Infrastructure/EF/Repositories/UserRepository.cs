@@ -21,6 +21,7 @@ public class UserRepository : BaseRepository<ApplicationDbContext, User>, IUserR
 
             results = results.Where(x => x.Name!.ToLowerInvariant().Contains(paginate.Query) ||
                                          x.ClientId!.ToLowerInvariant().Contains(paginate.Query) ||
+                                         x.Age!.ToString().Contains(paginate.Query) ||
                                          x.Gender!.ToLowerInvariant().Contains(paginate.Query) ||
                                          x.Identification!.ToLowerInvariant().Contains(paginate.Query) ||
                                          (!string.IsNullOrEmpty(x.Phone) &&
