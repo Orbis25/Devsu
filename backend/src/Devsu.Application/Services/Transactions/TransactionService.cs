@@ -98,7 +98,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
             }
             
                       
-            // Reverse the transaction amount from the old account
+            // handler transaction reversal if the type or amount has changed
             await TransactionHandlerAsync(input, transaction, cancellationToken).ConfigureAwait(false);
 
             transaction.Type = input.Type;
@@ -137,7 +137,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
             }
             
             // Reverse the transaction amount from the account
-            await ApplyUpdateToAccountAsync(transaction.AccountId!.Value, transaction, false, cancellationToken)
+            await ApplyUpdateToAccountAsync(transaction.AccountId!.Value, transaction, true, cancellationToken)
                 .ConfigureAwait(false);
 
            await _accountRepository.CommitAsync(cancellationToken).ConfigureAwait(false);
