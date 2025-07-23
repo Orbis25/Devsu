@@ -4,7 +4,7 @@ public class AccountEFCoreConfig : EFCoreConfiguration<Account>
 {
     public override void ConfigureEF(EntityTypeBuilder<Account> builder)
     {
-        builder.ToTable("accounts");
+        builder.ToTable("Accounts");
         builder.HasIndex(x => x.AccountNumber).IsUnique();
         builder.HasIndex(x => x.AccountType);
         
