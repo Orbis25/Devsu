@@ -11,3 +11,12 @@ global using Domain.Options;
 global using Microsoft.AspNetCore.Cors.Infrastructure;
 global using Devsu.Application.Repositories;
 global using Devsu.Infrastructure.EF.Repositories.Core;
+global using Devsu.Application.Mappers;
+global using Devsu.Application.Services.Accounts;
+global using Devsu.Application.Services.Users;
+global using Devsu.Application.Validators.Users;
+global using Devsu.Infrastructure.EF.Repositories;
+global using FluentValidation;
+global using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
+global using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+
