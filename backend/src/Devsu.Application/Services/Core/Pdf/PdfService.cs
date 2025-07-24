@@ -11,7 +11,6 @@ public class PdfService : IPdfService
     public byte[] GeneratePdfAsBytes(string? html = "")
     {
         Installation.LinuxAndDockerDependenciesAutoConfig = true;
-        License.LicenseKey = "";
         var renderer = new ChromePdfRenderer();
         var pdf = renderer.RenderHtmlAsPdf(html);
         using var ms = new MemoryStream();
