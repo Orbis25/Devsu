@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -15,19 +15,21 @@
       <PackageReference Include="FluentValidation" Version="12.0.0" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
       <PackageReference Include="IronPdf.Linux" Version="2025.7.13" />
-      <PackageReference Include="IronPdf.Native.Chrome.Linux" Version="2025.7.13" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7">
+        <PackageReference Include="IronPdf.Native.Chrome.Linux" Version="2025.7.13" />
+        <PackageReference Include="IronPdf.Native.Chrome.MacOS" Version="2025.7.13" />
+        <PackageReference Include="IronPdf.Native.Chrome.Windows" Version="2025.7.13" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.18" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.18">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
       <PackageReference Include="SharpGrip.FluentValidation.AutoValidation.Mvc" Version="1.5.0" />
     </ItemGroup>
 
     <ItemGroup>
       <Reference Include="Microsoft.AspNetCore.Mvc.Core">
-        <HintPath>..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\9.0.1\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+        <HintPath>..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\8.0.1\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
       </Reference>
     </ItemGroup>
 

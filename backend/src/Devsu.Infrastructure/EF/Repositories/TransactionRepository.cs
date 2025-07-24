@@ -15,7 +15,8 @@ public class TransactionRepository : BaseRepository<ApplicationDbContext,Transac
         Expression<Func<Transaction, bool>>? expression = default,
         CancellationToken cancellationToken = default)
     {
-        var results = GetAll(expression);
+        var results = GetAll(expression).Include(x => x.Account)
+            .ThenInclude(x => x!.User).AsQueryable();
 
         if (!string.IsNullOrEmpty(paginate.Query))
         {

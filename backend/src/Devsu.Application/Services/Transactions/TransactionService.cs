@@ -194,6 +194,22 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
         }
     }
 
+    
+    public async Task<PaginationResult<GetTransaction>> SearchAsync(SearchTransactions paginate,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+
+            return new();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e,"Error searching transactions: {Message}", e.Message);
+            return new();
+        }
+    }
+    
 
     public Response<string> ExportTransactionReport()
     {

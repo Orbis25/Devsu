@@ -3,6 +3,7 @@ services:
     build:
       context: ./src
       dockerfile: Dockerfile
+    platform: linux/amd64
     ports:
       - "5001:8080"
     environment:
@@ -11,14 +12,17 @@ services:
     depends_on:
       - db
     restart: unless-stopped
+    # ✅ REMOVIDO: volumes que sobrescribe el build
 
   db:
     image: postgres:15-alpine
+    platform: linux/amd64
     restart: unless-stopped
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=Devsu
+      - POSTGRES_USER=postgres  # ✅ Corregido (era postgress)
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
       - "5432:5432"
     volumes:
