@@ -11,6 +11,6 @@ public static class EnumExtensions
     /// <param name="enumValue">Enum</param>
     /// <returns>string</returns>
     public static string GetDisplay(this Enum enumValue)
-        => enumValue.GetType()?.GetMember(enumValue.ToString())?.FirstOrDefault()?.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? enumValue.ToString();
+        => enumValue.GetType().GetMember(enumValue.ToString()).FirstOrDefault()?.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? enumValue.ToString();
 
 }

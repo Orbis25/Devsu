@@ -3,7 +3,6 @@ using Devsu.Application.Extensions;
 using Devsu.Application.Resources;
 using Devsu.Application.Services.Core.Pdf;
 using Domain.Enums;
-using Microsoft.EntityFrameworkCore;
 
 namespace Devsu.Application.Services.Transactions;
 
@@ -130,12 +129,12 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
                     AccountId = input.AccountId
                 };
 
-                var (limitMessage, limitResult) = CanCreateOrUpdateTransaction(trx, account!,false);
+                var (limitMessage, limitResult) = CanCreateOrUpdateTransaction(trx, account,false);
 
                 if (!limitResult)
                 {
                     _logger.LogWarning("User with AccountId {AccountId} has exceeded transaction limits: {Message}",
-                        account!.Id,
+                        account.Id,
                         limitMessage);
                     return new() { Message = limitMessage };
                 }
@@ -306,7 +305,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
     private static void ApplyTransaction(EditTransaction edit, Account account)
     {
-        if (edit.Type!.ToLowerInvariant() == TransactionType.Credit.GetDisplay())
+        if (edit.Type.ToLowerInvariant() == TransactionType.Credit.GetDisplay())
             account.CurrentBalance += edit.Amount;
         else if (edit.Type.ToLowerInvariant() == TransactionType.Debit.GetDisplay())
             account.CurrentBalance -= edit.Amount;

@@ -2,6 +2,9 @@ using System.Reflection;
 using Devsu.Infrastructure.Extensions;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+IronPdf.Installation.LinuxAndDockerDependenciesAutoConfig = false;
+IronPdf.Installation.ChromeGpuMode = IronPdf.Engines.Chrome.ChromeGpuModes.Disabled;
+IronPdf.Installation.Initialize();
 
 var builder = WebApplication.CreateBuilder(args);
 

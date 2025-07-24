@@ -1,10 +1,7 @@
 ﻿using Domain.Core.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace Devsu.Infrastructure.EF.Configurations.Core;
 
-public abstract class EFCoreConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
+public abstract class EfCoreConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
        where TEntity : BaseModel
 {
     public void Configure(EntityTypeBuilder<TEntity> builder)

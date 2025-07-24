@@ -1,7 +1,5 @@
 using System.Reflection;
-using Devsu.Infrastructure.EF.Configurations.Models;
 using Domain.Core.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Devsu.Infrastructure.EF.Persistence;
 

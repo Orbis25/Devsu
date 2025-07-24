@@ -1,6 +1,6 @@
 namespace Devsu.Infrastructure.EF.Configurations.Models;
 
-public class TransactionsEFCoreConfig : EFCoreConfiguration<Transaction>
+public class TransactionsEfCoreConfig : EfCoreConfiguration<Transaction>
 {
     public override void ConfigureEF(EntityTypeBuilder<Transaction> builder)
     {

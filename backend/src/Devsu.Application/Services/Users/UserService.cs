@@ -1,5 +1,3 @@
-using Devsu.Application.Services.Core;
-
 namespace Devsu.Application.Services.Users;
 
 public class UserService: BaseService<User,GetUser,IUserRepository>, IUserService
@@ -92,7 +90,7 @@ public class UserService: BaseService<User,GetUser,IUserRepository>, IUserServic
                 user.Password = input.Password; 
             }
 
-            var result = await _repository.UpdateAsync(user, cancellationToken);
+            var _ = await _repository.UpdateAsync(user, cancellationToken);
 
             return new();
         }

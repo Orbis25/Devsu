@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Linq.Expressions;
 using Devsu.Application.Dtos.Core;
 
@@ -22,10 +23,10 @@ public class AccountRepository : BaseRepository<ApplicationDbContext,Account>, I
 
             results = results.Where(x => x.AccountType!.ToLower().Contains(paginate.Query) ||
                                          (!string.IsNullOrEmpty(x.AccountNumber) && x.AccountNumber.ToLower().Contains(paginate.Query)) ||
-                                         x.DailyDebitLimit.ToString().Contains(paginate.Query) || 
-                                         x.DailyDebit.ToString().Contains(paginate.Query) || 
-                                         x.CurrentBalance.ToString().Contains(paginate.Query) || 
-                                         x.InitialBalance.ToString().Contains(paginate.Query)
+                                         x.DailyDebitLimit.ToString(CultureInfo.CurrentCulture).Contains(paginate.Query) || 
+                                         x.DailyDebit.ToString(CultureInfo.CurrentCulture).Contains(paginate.Query) || 
+                                         x.CurrentBalance.ToString(CultureInfo.CurrentCulture).Contains(paginate.Query) || 
+                                         x.InitialBalance.ToString(CultureInfo.CurrentCulture).Contains(paginate.Query)
                                          );
             
         }

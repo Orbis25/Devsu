@@ -1,6 +1,6 @@
 namespace Devsu.Infrastructure.EF.Configurations.Models;
 
-public class AccountEFCoreConfig : EFCoreConfiguration<Account>
+public class AccountEfCoreConfig : EfCoreConfiguration<Account>
 {
     public override void ConfigureEF(EntityTypeBuilder<Account> builder)
     {

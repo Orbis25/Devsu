@@ -1,5 +1,4 @@
 using Devsu.Application.Dtos.Core;
-using Devsu.Application.Dtos.Users;
 using Devsu.Application.Services.Core;
 using Microsoft.AspNetCore.Mvc;
 

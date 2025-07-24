@@ -1,5 +1,3 @@
-using Domain.Core.Models;
-
 namespace Domain.Models;
 
 public class Transaction : BaseModel

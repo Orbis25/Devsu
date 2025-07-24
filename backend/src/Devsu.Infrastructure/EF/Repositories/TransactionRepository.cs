@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Linq.Expressions;
 using Devsu.Application.Dtos.Core;
 
@@ -22,7 +23,7 @@ public class TransactionRepository : BaseRepository<ApplicationDbContext,Transac
 
             results = results.Where(x => x.Type!.ToLower().Contains(paginate.Query) ||
                                          (!string.IsNullOrEmpty(x.Movement) && x.Movement.ToLower().Contains(paginate.Query)) ||
-                                         x.Amount.ToString().ToLower().Contains(paginate.Query));
+                                         x.Amount.ToString(CultureInfo.CurrentCulture).ToLower().Contains(paginate.Query));
         }
 
         if (paginate.NoPaginate)

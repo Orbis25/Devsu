@@ -11,5 +11,5 @@ public class Account : BaseModel
     public decimal CurrentBalance { get; set; }
     public User? User { get; set; }
     public Guid UserId { get; set; }
-    public ICollection<Transaction> Transactions { get; set; }
+    public ICollection<Transaction>? Transactions { get; set; }
 }

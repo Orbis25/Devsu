@@ -1,41 +1,37 @@
-# Stage 1: Build
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+ARG TARGETARCH
 WORKDIR /src
 
 COPY . .
 
-# Build simple y estable (sin trimming que causa seg fault)
-RUN dotnet restore && dotnet publish -c Release -o /app/publish \
+RUN dotnet restore -a $TARGETARCH && dotnet publish -a $TARGETARCH -c Release -o /app/publish \
     --no-restore \
-    --self-contained false \
-    /p:PublishTrimmed=false \
-    /p:PublishSingleFile=false
+    --self-contained false 
 
-# Stage 2: Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:9.0-bookworm-slim AS runtime
+RUN apt update \
+    && apt install -y sudo libxkbcommon-x11-0 libc6 libc6-dev libgtk2.0-0 libnss3 
 
-# Dependencias para IronPDF Linux
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    libgdiplus \
-    libfontconfig1 \
-    fonts-dejavu-core \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:9.0-bookworm-slim AS runtime
 
-RUN groupadd -r appgroup && useradd -r -g appgroup appuser
+RUN apt update \
+    && apt install -y sudo libxkbcommon-x11-0 libc6 libc6-dev libgtk2.0-0 libnss3
+
+RUN mkdir -p /home/appuser/.ironsoftware \
+    && chmod 777 /home/appuser/.ironsoftware
+
+RUN groupadd -g 1001 appgroup && \
+    useradd -m -u 1001 -g appgroup appuser
 
 WORKDIR /app
+
 COPY --from=build --chown=appuser:appgroup /app/publish .
 
-USER appuser
+# USER appuser
 
 ENV DOTNET_RUNNING_IN_CONTAINER=true \
+    DOTNET_USE_POLLING_FILE_WATCHER=true \
     ASPNETCORE_URLS=http://+:8080
 
 EXPOSE 8080
-
-# HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=2 \
-#     CMD wget -q --spider http://localhost:8080/health || exit 1
 
 ENTRYPOINT ["dotnet", "Devsu.API.dll"]

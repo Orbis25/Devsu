@@ -1,6 +1,6 @@
 namespace Devsu.Infrastructure.EF.Configurations.Models;
 
-public class UserEFCoreConfig : EFCoreConfiguration<User>
+public class UserEfCoreConfig : EfCoreConfiguration<User>
 {
     public override void ConfigureEF(EntityTypeBuilder<User> builder)
     {
