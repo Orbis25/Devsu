@@ -62,17 +62,16 @@ public class TransactionsController : CoreController<ITransactionService, GetTra
         return NoContent();
     }
 
+ 
     /// <summary>
-    /// report transactions
+    /// 
     /// </summary>
-    /// <param name="id"></param>
-    /// <param name="input"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [HttpGet("report/pdf")]
     [ProducesResponseType(typeof(Response), StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> ReportPdf(CancellationToken cancellationToken = default)
+    public IActionResult ReportPdf(CancellationToken cancellationToken = default)
     {
         var result = _service.ExportTransactionReport();
         if (!result.IsSuccess) return BadRequest(result);

@@ -13,7 +13,7 @@ public class EditAccountValidator : AbstractValidator<EditAccount>
         RuleFor(x => x.AccountType).NotNull()
             .WithMessage("Campo tipo de cuenta es requerido")
             .NotEmpty().WithMessage("Campo tipo de cuenta es requerido")
-            .Must(x => x.ToLowerInvariant() == "ahorro" || x.ToLowerInvariant() == "corriente")
+            .Must(x => x!.ToLowerInvariant() == "ahorro" || x.ToLowerInvariant() == "corriente")
             .WithMessage("El campo tipo de cuenta debe ser Ahorro o Corriente");
         
         RuleFor(x => x.InitialBalance).NotNull()

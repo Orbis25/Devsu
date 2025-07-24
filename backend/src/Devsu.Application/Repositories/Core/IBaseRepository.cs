@@ -1,5 +1,4 @@
 using System.Linq.Expressions;
-using Devsu.Application.Dtos.Core;
 using Domain.Core.Models;
 
 namespace Devsu.Application.Repositories.Core;

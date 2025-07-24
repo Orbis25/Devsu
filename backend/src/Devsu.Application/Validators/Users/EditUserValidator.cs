@@ -28,7 +28,7 @@ public class EditUserValidator : AbstractValidator<EditUser>
             .NotNull()
             .WithMessage("Campo Genero es requerido")
             .NotEmpty().WithMessage("Campo Genero requerido")
-            .Must(x => x.ToLowerInvariant() == "hombre" || x.ToLowerInvariant() == "mujer")
+            .Must(x => x!.ToLowerInvariant() == "hombre" || x.ToLowerInvariant() == "mujer")
             .WithMessage("El campo Genero debe ser Hombre o Mujer");
 
         RuleFor(x => x.Password)

@@ -1,31 +1,36 @@
-version: '3.9'
-
 services:
   web:
     build:
       context: ./src
       dockerfile: Dockerfile
+    platform: linux/amd64
     ports:
-      - "5001:80"
+      - "5001:8080"
     environment:
-      ASPNETCORE_ENVIRONMENT: "Development"
-      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=Devsu;Username=postgress;Password=postgress"
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=Devsu;Username=postgres;Password=postgres
     depends_on:
-      - db
-    volumes:
-      - ./src:/app
+      db:
+        condition: service_healthy
+    restart: unless-stopped
 
   db:
     image: postgres:15-alpine
-    restart: always
+    platform: linux/amd64
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: Devsu
-      POSTGRES_USER: postgress
-      POSTGRES_PASSWORD: postgress
+      - POSTGRES_DB=Devsu
+      - POSTGRES_USER=postgres 
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d Devsu"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
 volumes:
   pgdata:

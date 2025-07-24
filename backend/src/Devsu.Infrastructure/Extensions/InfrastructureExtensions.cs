@@ -54,8 +54,6 @@ public static class InfrastructureExtensions
     {
         services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
         services.AddFluentValidationAutoValidation();
-        services.AddFluentValidationRulesToSwagger();
-
         return services;
     }
 

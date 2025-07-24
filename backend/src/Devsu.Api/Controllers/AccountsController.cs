@@ -1,16 +1,21 @@
 using Devsu.Application.Dtos.Accounts;
 using Devsu.Application.Dtos.Core;
-using Devsu.Application.Dtos.Users;
 using Devsu.Application.Services.Accounts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Devsu.API.Controllers;
-
+/// <summary>
+/// 
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class AccountsController : CoreController<IAccountService,GetAccount>
 {
+
     private readonly IAccountService _service;
+    /// <summary>
+    /// </summary>
+    /// <param name="service"></param>
     public AccountsController(IAccountService service) : base(service)
     {
         _service = service;

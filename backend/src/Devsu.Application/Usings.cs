@@ -1,7 +1,6 @@
 ﻿global using Microsoft.AspNetCore.Mvc;
 global using Devsu.Application.Repositories.Core;
 global using Domain.Models;
-global using Devsu.Application.Dtos.Core;
 global using AutoMapper;
 global using Devsu.Application.Dtos.Core;
 global using Devsu.Application.Dtos.Users;

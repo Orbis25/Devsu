@@ -196,7 +196,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
     }
 
 
-    public Response<string>? ExportTransactionReport()
+    public Response<string> ExportTransactionReport()
     {
         return new()
         {

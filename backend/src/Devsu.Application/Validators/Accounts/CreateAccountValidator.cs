@@ -15,7 +15,7 @@ public class CreateAccountValidator : AbstractValidator<CreateAccount>
         RuleFor(x => x.AccountType).NotNull()
             .WithMessage("Campo tipo de cuenta es requerido")
             .NotEmpty().WithMessage("Campo tipo de cuenta es requerido")
-            .Must(x => x.ToLowerInvariant() == AccountType.Savings.GetDisplay() || x.ToLowerInvariant() == AccountType.Checking.GetDisplay())
+            .Must(x => x!.ToLowerInvariant() == AccountType.Savings.GetDisplay() || x.ToLowerInvariant() == AccountType.Checking.GetDisplay())
             .WithMessage("El campo tipo de cuenta debe ser Ahorro o Corriente");
         
         RuleFor(x => x.InitialBalance).NotNull()
