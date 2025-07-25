@@ -190,7 +190,8 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
             await _accountRepository.CommitAsync(cancellationToken).ConfigureAwait(false);
 
-            return await base.RemoveAsync(id, cancellationToken);
+            var result = await _repository.SoftRemoveAsync(id, cancellationToken);
+            return new();
         }
         catch (Exception e)
         {
