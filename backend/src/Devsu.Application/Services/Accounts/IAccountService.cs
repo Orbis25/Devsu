@@ -7,4 +7,5 @@ public interface IAccountService: IBaseService<GetAccount>
 {
     Task<Response<Guid>> CreateAsync(CreateAccount input, CancellationToken cancellationToken);
     Task<Response> UpdateAsync(Guid id, EditAccount input, CancellationToken cancellationToken = default);
+    Task CheckDailyLimitAsync(CancellationToken cancellationToken = default);
 }

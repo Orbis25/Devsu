@@ -1,4 +1,5 @@
 using Devsu.Application.Dtos.Accounts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Devsu.Application.Services.Accounts;
 
@@ -85,4 +86,26 @@ public class AccountService : BaseService<Account, GetAccount, IAccountRepositor
         }
     }
     
+    public async Task CheckDailyLimitAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Checking daily limit for accounts");
+
+            var accounts = await _repository.GetAll(x => x.LastDailyDebitUpdated.Date < DateTime.UtcNow.Date)
+                .ToListAsync(cancellationToken);
+
+            foreach (var account in accounts)
+            {
+                account.DailyDebit = 0;
+                account.LastDailyDebitUpdated = DateTime.UtcNow;
+            }
+
+            await _repository.CommitAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error checking daily limit: {Message}", e.Message);
+        }
+    }
 }

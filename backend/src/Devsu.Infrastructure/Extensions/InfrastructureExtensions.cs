@@ -1,4 +1,5 @@
 
+using Devsu.Application.Jobs;
 using Devsu.Application.Services.Core.Pdf;
 using Devsu.Application.Services.Transactions;
 
@@ -20,6 +21,8 @@ public static class InfrastructureExtensions
             .AddServices()
             .ConfigurePdf()
             .AddAutoMapper(typeof(UserMapper).Assembly);
+
+        services.AddHostedService<DailyLimitBackgroundService>();
         
         return services;
     }
@@ -80,6 +83,7 @@ public static class InfrastructureExtensions
     private static IServiceCollection AddConfigOptions(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<CorsConfigOption>(configuration.GetSection(nameof(CorsConfigOption)));
+        services.Configure<JobOption>(configuration.GetSection(nameof(JobOption)));
         return services;
     }
 
