@@ -1,3 +1,4 @@
+using System.Text;
 using Devsu.Application.Dtos.Transactions;
 using Devsu.Application.Extensions;
 using Devsu.Application.Resources;
@@ -12,6 +13,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
     private readonly IAccountRepository _accountRepository;
     private readonly ILogger<TransactionService> _logger;
     private readonly IPdfService _pdfService;
+    private readonly IMapper _mapper;
 
     public TransactionService(ITransactionRepository repository, IMapper mapper, ILogger<TransactionService> logger,
         IAccountRepository accountRepository, IPdfService pdfService) : base(repository, mapper, logger)
@@ -20,6 +22,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
         _logger = logger;
         _accountRepository = accountRepository;
         _pdfService = pdfService;
+        _mapper = mapper;
     }
 
     public async Task<Response<Guid>> CreateAsync(CreateTransaction input, CancellationToken cancellationToken)
@@ -58,6 +61,16 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
                 }
             }
 
+            // Update the account's current balance based on the transaction type
+            switch (isDebit)
+            {
+                case false:
+                    account.CurrentBalance += input.Amount;
+                    break;
+                case true:
+                    account.CurrentBalance -= input.Amount;
+                    break;
+            }
 
             var data = new Transaction
             {
@@ -72,16 +85,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
             var result = _repository.Attach(data);
 
-            // Update the account's current balance based on the transaction type
-            switch (isDebit)
-            {
-                case false:
-                    account.CurrentBalance += input.Amount;
-                    break;
-                case true:
-                    account.CurrentBalance -= input.Amount;
-                    break;
-            }
+            
 
             await _repository.CommitAsync(cancellationToken).ConfigureAwait(false);
 
@@ -129,7 +133,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
                     AccountId = input.AccountId
                 };
 
-                var (limitMessage, limitResult) = CanCreateOrUpdateTransaction(trx, account,false);
+                var (limitMessage, limitResult) = CanCreateOrUpdateTransaction(trx, account, false);
 
                 if (!limitResult)
                 {
@@ -143,7 +147,8 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
             // handler transaction reversal if the type or amount has changed
             await TransactionHandlerAsync(input, transaction, cancellationToken).ConfigureAwait(false);
-
+            
+            transaction.CurrentBalance = account.CurrentBalance;
             transaction.Type = input.Type;
             transaction.Amount = input.Amount;
             transaction.AccountId = input.AccountId;
@@ -194,31 +199,99 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
         }
     }
 
-    
-    public async Task<PaginationResult<GetTransaction>> SearchAsync(SearchTransactions paginate,
+
+    public async Task<Response<PaginationResult<T>>> SearchAsync<T>(SearchTransactions search,
+        CancellationToken cancellationToken = default) where T : GetTransaction, new()
+    {
+        try
+        {
+            var hasDateRange = search is { From: not null, To: not null };
+            var from = hasDateRange ? search.From!.Value.Date : DateTime.MinValue;
+            var to = hasDateRange ? search.To!.Value.Date : DateTime.MaxValue;
+
+            var results = await _repository.GetPaginatedListAsync(search,
+                    x => x.CreatedAt.Date >= from && x.CreatedAt <= to, cancellationToken)
+                .ConfigureAwait(false);
+
+            var mappedResults = _mapper.Map<List<T>>(results.Results);
+
+            return new()
+            {
+                Data = new()
+                {
+                    ActualPage = results.ActualPage,
+                    Qyt = results.Qyt,
+                    PageTotal = results.PageTotal,
+                    Total = results.Total,
+                    Results = mappedResults
+                }
+            };
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error searching transactions: {Message}", e.Message);
+            return new();
+        }
+    }
+
+
+    public async Task<Response<string>> ExportTransactionReportAsync(ExportTransactionsSearch search,
         CancellationToken cancellationToken = default)
     {
         try
         {
+            _logger.LogInformation("Exporting transaction report with search criteria: {Search}", search.Query);
 
-            return new();
+
+            var results = await SearchAsync<ExportTransactionSearchResponse>(new()
+            {
+                Query = search.Query,
+                From = search.From,
+                To = search.To,
+                NoPaginate = true
+            }, cancellationToken).ConfigureAwait(false);
+
+            var items = results.Data?.Results ?? [];
+
+            var sb = new StringBuilder();
+
+            foreach (var transaction in items)
+            {
+                //body of table
+                
+                var isDebit = transaction.Type!.ToLowerInvariant() == TransactionType.Debit.GetDisplay();
+                var movement = isDebit
+                    ? $"-{transaction.Amount}"
+                    : $"{transaction.Amount}";
+
+                sb.AppendLine(
+                    $@"<tr>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.CreatedAt:dd/MM/yyyy}</td>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.ClientName}</td>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.Account?.AccountNumber}</td>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.Account?.AccountType}</td>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.Account?.InitialBalance}</td>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.Status.ToString()}</td>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{movement}</td>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.CurrentBalance}</td>
+                        </tr>");
+            }
+
+            var body = sb.ToString();
+            var html = HtmlResources.TransactionsHtml.Replace("[body]", body);
+
+            return new()
+            {
+                Data = _pdfService.GeneratePdfAsBase64(html)
+            };
         }
         catch (Exception e)
         {
-            _logger.LogError(e,"Error searching transactions: {Message}", e.Message);
-            return new();
+            _logger.LogError(e, "Error exporting transaction report: {Message}", e.Message);
+            return new() { Message = "Error exporting transaction report" };
         }
     }
-    
 
-    public Response<string> ExportTransactionReport()
-    {
-        return new()
-        {
-            Data = _pdfService.GeneratePdfAsBase64(HtmlResources.TransactionsHtml)
-        };
-    }
-    
     private async Task TransactionHandlerAsync(EditTransaction edit, Transaction transaction,
         CancellationToken cancellationToken)
     {
@@ -335,7 +408,8 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
             account.CurrentBalance += transaction.Amount;
     }
 
-    private (string, bool) CanCreateOrUpdateTransaction(CreateTransaction transaction, Account account, bool isCreate = true)
+    private (string, bool) CanCreateOrUpdateTransaction(CreateTransaction transaction, Account account,
+        bool isCreate = true)
     {
         //check daily transaction limit
         if (transaction.Amount > account.DailyDebitLimit)
@@ -361,15 +435,15 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
             return (msg, false);
         }
-        
+
         if (isCreate)
         {
             ApplyAccountLimit(account, transaction);
         }
-        
+
         return (string.Empty, true);
     }
-    
+
     private void ApplyAccountLimit(Account account, CreateTransaction transaction)
     {
         account.DailyDebit += transaction.Amount;

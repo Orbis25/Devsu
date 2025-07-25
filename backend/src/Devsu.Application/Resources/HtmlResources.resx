@@ -41,7 +41,7 @@
             &lt;/tr&gt;
         &lt;/thead&gt;
         &lt;tbody&gt;
-            &lt;!-- [body] --&gt;
+            [body]
         &lt;/tbody&gt;
     &lt;/table&gt;
 &lt;/body&gt;

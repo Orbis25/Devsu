@@ -1,7 +1,8 @@
 using System.Reflection;
 using Devsu.Infrastructure.Extensions;
 
-IronPdf.License.LicenseKey = "";
+IronPdf.License.LicenseKey = Environment.GetEnvironmentVariable("LICENSE_KEY") ?? throw new InvalidOperationException("License key is not set in environment variables.");
+
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 IronPdf.Installation.LinuxAndDockerDependenciesAutoConfig = false;
 IronPdf.Installation.ChromeGpuMode = IronPdf.Engines.Chrome.ChromeGpuModes.Disabled;

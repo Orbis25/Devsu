@@ -8,5 +8,6 @@ public class AccountMapper : Profile
     {
         CreateMap<CreateAccount, Account>().ReverseMap();
         CreateMap<GetAccount, Account>().ReverseMap();
+        CreateMap<GetAccountTransaction, Account>().ReverseMap();
     }
 }
