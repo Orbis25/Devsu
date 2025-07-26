@@ -1,0 +1,3008 @@
+{
+	"info": {
+		"_postman_id": "ee018be0-3f1f-46a4-b768-3097c85274e1",
+		"name": "DEVSU APP API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36675408"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Accounts",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "update",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"accountNumber\": \"string\",\n  \"accountType\": \"string\",\n  \"initialBalance\": 1423.7859539989595,\n  \"userId\": \"urn:uuid:53193ced-221b-9714-228e-b8a8ce363ee8\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Accounts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Accounts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"accountNumber\": \"string\",\n  \"accountType\": \"string\",\n  \"initialBalance\": 1423.7859539989595,\n  \"userId\": \"urn:uuid:53193ced-221b-9714-228e-b8a8ce363ee8\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Accounts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Accounts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"isSuccess\": true,\n  \"message\": \"string\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"accountNumber\": \"string\",\n  \"accountType\": \"string\",\n  \"initialBalance\": 1423.7859539989595,\n  \"userId\": \"urn:uuid:53193ced-221b-9714-228e-b8a8ce363ee8\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Accounts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Accounts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								},
+								{
+									"name": "Get by Id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Accounts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Accounts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Accounts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Accounts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Accounts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Accounts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Accounts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Accounts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								},
+								{
+									"name": "soft delete by Id",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Accounts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Accounts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Accounts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Accounts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Accounts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Accounts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Accounts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Accounts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create a new",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountNumber\": \"string\",\n  \"accountType\": \"string\",\n  \"initialBalance\": 1423.7859539989595,\n  \"userId\": \"urn:uuid:53193ced-221b-9714-228e-b8a8ce363ee8\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Accounts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Accounts"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"accountNumber\": \"string\",\n  \"accountType\": \"string\",\n  \"initialBalance\": 1423.7859539989595,\n  \"userId\": \"urn:uuid:53193ced-221b-9714-228e-b8a8ce363ee8\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Accounts"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"isSuccess\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"urn:uuid:6d4bc670-2adc-b651-cbd2-613073060c72\",\n    \"accountNumber\": \"string\",\n    \"accountType\": \"string\",\n    \"initialBalance\": 8684.927701377834,\n    \"currentBalance\": 691.1587558166476,\n    \"dailyDebitLimit\": 2106.365852728951,\n    \"user\": {\n      \"id\": \"urn:uuid:ab172f34-b611-57f1-4963-86bd9bc753ae\",\n      \"name\": \"string\",\n      \"gender\": \"string\",\n      \"age\": 343,\n      \"identification\": \"string\",\n      \"phone\": \"string\",\n      \"address\": \"strin\",\n      \"clientId\": \"string\",\n      \"password\": \"string\"\n    },\n    \"userId\": \"790aa00b-41e4-7eac-a9e1-60db211b862c\"\n  }\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"accountNumber\": \"string\",\n  \"accountType\": \"string\",\n  \"initialBalance\": 1423.7859539989595,\n  \"userId\": \"urn:uuid:53193ced-221b-9714-228e-b8a8ce363ee8\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Accounts"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								}
+							]
+						},
+						{
+							"name": "Get all paginated",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Accounts?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Accounts"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "4161"
+										},
+										{
+											"key": "Qyt",
+											"value": "4161"
+										},
+										{
+											"key": "NoPaginate",
+											"value": "false"
+										},
+										{
+											"key": "Query",
+											"value": "string"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Accounts?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Accounts"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Accounts?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Accounts"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Accounts?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Accounts"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Transactions",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "update",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"type\": \"string\",\n  \"amount\": 8707.726261600594,\n  \"accountId\": \"87e86c93-c2be-b8e5-c9fc-fff3f5a0b086\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"type\": \"string\",\n  \"amount\": 8707.726261600594,\n  \"accountId\": \"87e86c93-c2be-b8e5-c9fc-fff3f5a0b086\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"isSuccess\": true,\n  \"message\": \"string\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"type\": \"string\",\n  \"amount\": 8707.726261600594,\n  \"accountId\": \"87e86c93-c2be-b8e5-c9fc-fff3f5a0b086\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								},
+								{
+									"name": "Get by Id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								},
+								{
+									"name": "soft delete by Id",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "report",
+							"item": [
+								{
+									"name": "pdf",
+									"item": [
+										{
+											"name": "/api/Transactions/report/pdf",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/report/pdf?Query=string&From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														"report",
+														"pdf"
+													],
+													"query": [
+														{
+															"key": "Query",
+															"value": "string"
+														},
+														{
+															"key": "From",
+															"value": "2024-09-09T10:57:58.812Z"
+														},
+														{
+															"key": "To",
+															"value": "2024-09-09T10:57:58.812Z"
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "No Content",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "text/plain"
+															},
+															{
+																"key": "Authorization",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/Transactions/report/pdf?Query=string&From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"Transactions",
+																"report",
+																"pdf"
+															],
+															"query": [
+																{
+																	"key": "Query",
+																	"value": "string"
+																},
+																{
+																	"key": "From",
+																	"value": "2024-09-09T10:57:58.812Z"
+																},
+																{
+																	"key": "To",
+																	"value": "2024-09-09T10:57:58.812Z"
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"isSuccess\": true,\n  \"message\": \"string\"\n}"
+												},
+												{
+													"name": "Bad Request",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "text/plain"
+															},
+															{
+																"key": "Authorization",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/Transactions/report/pdf?Query=string&From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"Transactions",
+																"report",
+																"pdf"
+															],
+															"query": [
+																{
+																	"key": "Query",
+																	"value": "string"
+																},
+																{
+																	"key": "From",
+																	"value": "2024-09-09T10:57:58.812Z"
+																},
+																{
+																	"key": "To",
+																	"value": "2024-09-09T10:57:58.812Z"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "json",
+									"item": [
+										{
+											"name": "/api/Transactions/report/json",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/report/json?Query=string&From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														"report",
+														"json"
+													],
+													"query": [
+														{
+															"key": "Query",
+															"value": "string"
+														},
+														{
+															"key": "From",
+															"value": "2024-09-09T10:57:58.812Z"
+														},
+														{
+															"key": "To",
+															"value": "2024-09-09T10:57:58.812Z"
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "No Content",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "text/plain"
+															},
+															{
+																"key": "Authorization",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/Transactions/report/json?Query=string&From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"Transactions",
+																"report",
+																"json"
+															],
+															"query": [
+																{
+																	"key": "Query",
+																	"value": "string"
+																},
+																{
+																	"key": "From",
+																	"value": "2024-09-09T10:57:58.812Z"
+																},
+																{
+																	"key": "To",
+																	"value": "2024-09-09T10:57:58.812Z"
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"isSuccess\": true,\n  \"message\": \"string\"\n}"
+												},
+												{
+													"name": "Bad Request",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "text/plain"
+															},
+															{
+																"key": "Authorization",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/Transactions/report/json?Query=string&From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"Transactions",
+																"report",
+																"json"
+															],
+															"query": [
+																{
+																	"key": "Query",
+																	"value": "string"
+																},
+																{
+																	"key": "From",
+																	"value": "2024-09-09T10:57:58.812Z"
+																},
+																{
+																	"key": "To",
+																	"value": "2024-09-09T10:57:58.812Z"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "/api/Transactions/report",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions/report?From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z&Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions",
+												"report"
+											],
+											"query": [
+												{
+													"key": "From",
+													"value": "2024-09-09T10:57:58.812Z"
+												},
+												{
+													"key": "To",
+													"value": "2024-09-09T10:57:58.812Z"
+												},
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/report?From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z&Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														"report"
+													],
+													"query": [
+														{
+															"key": "From",
+															"value": "2024-09-09T10:57:58.812Z"
+														},
+														{
+															"key": "To",
+															"value": "2024-09-09T10:57:58.812Z"
+														},
+														{
+															"key": "Page",
+															"value": "4161"
+														},
+														{
+															"key": "Qyt",
+															"value": "4161"
+														},
+														{
+															"key": "NoPaginate",
+															"value": "false"
+														},
+														{
+															"key": "Query",
+															"value": "string"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"isSuccess\": true,\n  \"message\": \"string\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Transactions/report?From=2024-09-09T10:57:58.812Z&To=2024-09-09T10:57:58.812Z&Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Transactions",
+														"report"
+													],
+													"query": [
+														{
+															"key": "From",
+															"value": "2024-09-09T10:57:58.812Z"
+														},
+														{
+															"key": "To",
+															"value": "2024-09-09T10:57:58.812Z"
+														},
+														{
+															"key": "Page",
+															"value": "4161"
+														},
+														{
+															"key": "Qyt",
+															"value": "4161"
+														},
+														{
+															"key": "NoPaginate",
+															"value": "false"
+														},
+														{
+															"key": "Query",
+															"value": "string"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create a new",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"string\",\n  \"amount\": 8707.726261600594,\n  \"accountId\": \"87e86c93-c2be-b8e5-c9fc-fff3f5a0b086\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Transactions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Transactions"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"type\": \"string\",\n  \"amount\": 8707.726261600594,\n  \"accountId\": \"87e86c93-c2be-b8e5-c9fc-fff3f5a0b086\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"isSuccess\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"urn:uuid:8632af58-b086-1ad3-d817-bffa0063fb61\",\n    \"currentBalance\": 3838.0651619749838,\n    \"amount\": 8288.134498432675,\n    \"movement\": \"string\",\n    \"accountId\": \"urn:uuid:01af4181-78bf-6f76-e988-5a88a20010e9\",\n    \"account\": {\n      \"id\": \"06dcadec-0a30-f9b0-890b-34d93ccf4733\",\n      \"accountNumber\": \"string\",\n      \"accountType\": \"string\",\n      \"initialBalance\": 7417.814801228022,\n      \"currentBalance\": 3489.0551327146845,\n      \"dailyDebitLimit\": 9527.374304985702,\n      \"user\": {\n        \"id\": \"urn:uuid:428a5a32-404e-d09a-6320-8177d78f702d\",\n        \"name\": \"string\",\n        \"gender\": \"string\",\n        \"age\": 2575,\n        \"identification\": \"string\",\n        \"phone\": \"string\",\n        \"address\": \"string\",\n        \"clientId\": \"string\",\n        \"password\": \"string\"\n      },\n      \"userId\": \"6c527f62-eb9b-f390-fd50-a600f49cd801\"\n    },\n    \"createdAt\": \"1964-02-25T09:40:52.739Z\",\n    \"createdAtStr\": \"string\",\n    \"status\": false\n  }\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"type\": \"string\",\n  \"amount\": 8707.726261600594,\n  \"accountId\": \"87e86c93-c2be-b8e5-c9fc-fff3f5a0b086\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								}
+							]
+						},
+						{
+							"name": "Get all paginated",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Transactions?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Transactions"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "4161"
+										},
+										{
+											"key": "Qyt",
+											"value": "4161"
+										},
+										{
+											"key": "NoPaginate",
+											"value": "false"
+										},
+										{
+											"key": "Query",
+											"value": "string"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Transactions?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Transactions"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "update a user",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"string\",\n  \"gender\": \"string\",\n  \"age\": 9253,\n  \"identification\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\",\n  \"clientId\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"string\",\n  \"gender\": \"string\",\n  \"age\": 9253,\n  \"identification\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\",\n  \"clientId\": \"string\",\n  \"password\": \"string\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"isSuccess\": true,\n  \"message\": \"string\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"string\",\n  \"gender\": \"string\",\n  \"age\": 9253,\n  \"identification\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\",\n  \"clientId\": \"string\",\n  \"password\": \"string\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								},
+								{
+									"name": "Get by Id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								},
+								{
+									"name": "soft delete by Id",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:507a9c11-3040-cf95-1d57-4b9e1fdaed7e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create a new user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"string\",\n  \"gender\": \"string\",\n  \"age\": 9253,\n  \"identification\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\",\n  \"clientId\": \"string\",\n  \"password\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Users"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"string\",\n  \"gender\": \"string\",\n  \"age\": 9253,\n  \"identification\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\",\n  \"clientId\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"isSuccess\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"90663901-fd3c-9aba-7621-e0fde97ff3de\",\n    \"name\": \"string\",\n    \"gender\": \"string\",\n    \"age\": 823,\n    \"identification\": \"string\",\n    \"phone\": \"string\",\n    \"address\": \"string\",\n    \"clientId\": \"string\",\n    \"password\": \"string\"\n  }\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"string\",\n  \"gender\": \"string\",\n  \"age\": 9253,\n  \"identification\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\",\n  \"clientId\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								}
+							]
+						},
+						{
+							"name": "Get all paginated",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Users?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Users"
+									],
+									"query": [
+										{
+											"key": "Page",
+											"value": "4161"
+										},
+										{
+											"key": "Qyt",
+											"value": "4161"
+										},
+										{
+											"key": "NoPaginate",
+											"value": "false"
+										},
+										{
+											"key": "Query",
+											"value": "string"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Users?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Users?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Users?Page=4161&Qyt=4161&NoPaginate=false&Query=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Users"
+											],
+											"query": [
+												{
+													"key": "Page",
+													"value": "4161"
+												},
+												{
+													"key": "Qyt",
+													"value": "4161"
+												},
+												{
+													"key": "NoPaginate",
+													"value": "false"
+												},
+												{
+													"key": "Query",
+													"value": "string"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 6353,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"key_0\": {}\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}
