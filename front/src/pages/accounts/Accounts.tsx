@@ -260,6 +260,7 @@ function Accounts() {
                 value={values.userId}
                 onChange={handleChange}
               >
+                <option value="">Seleccione un cliente</option>
                 {users.map((user) => (
                   <option key={user.id} value={user.id}>
                     {user.name}
