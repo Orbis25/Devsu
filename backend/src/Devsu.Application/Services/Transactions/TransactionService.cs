@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json;
 using Devsu.Application.Dtos.Transactions;
 using Devsu.Application.Extensions;
 using Devsu.Application.Resources;
@@ -187,9 +188,12 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
             // Reverse the transaction amount from the account
             await ApplyUpdateToAccountAsync(transaction.AccountId!.Value, transaction, true, cancellationToken)
                 .ConfigureAwait(false);
-
-            await _accountRepository.CommitAsync(cancellationToken).ConfigureAwait(false);
-
+            
+            if (transaction.Type.ToLowerInvariant() == TransactionType.Debit.GetDisplay() && transaction.Account is not null)
+            {
+                ReverseAccountLimit(transaction.Account, transaction);
+            }
+            
             var result = await _repository.SoftRemoveAsync(id, cancellationToken);
             return new();
         }
@@ -211,7 +215,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
             var to = hasDateRange ? search.To!.Value.Date : DateTime.MaxValue;
 
             var results = await _repository.GetPaginatedListAsync(search,
-                    x => x.CreatedAt.Date >= from && x.CreatedAt <= to, cancellationToken)
+                    x => x.CreatedAt.Date >= from.Date && x.CreatedAt <= to.Date, cancellationToken)
                 .ConfigureAwait(false);
 
             var mappedResults = _mapper.Map<List<T>>(results.Results);
@@ -236,7 +240,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
     }
 
 
-    public async Task<Response<string>> ExportTransactionReportAsync(ExportTransactionsSearch search,
+    public async Task<Response<string>> ExportTransactionReportAsync(ExportTransactionsSearch search, bool isPdf = true,
         CancellationToken cancellationToken = default)
     {
         try
@@ -254,6 +258,21 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
             var items = results.Data?.Results ?? [];
 
+            if (!isPdf)
+            {
+                var json = JsonSerializer.Serialize(items, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+                
+                return new()
+                {
+                    Data = Convert.ToBase64String(Encoding.UTF8.GetBytes(json))
+                };
+            }
+            
+            
             var sb = new StringBuilder();
 
             foreach (var transaction in items)
@@ -267,7 +286,7 @@ public class TransactionService : BaseService<Transaction, GetTransaction, ITran
 
                 sb.AppendLine(
                     $@"<tr>
-                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.CreatedAt:dd/MM/yyyy}</td>
+                        <td style=""border: 1px solid #999; padding: 8px;"">{transaction.CreatedAt:dd-MM-yyyy}</td>
                         <td style=""border: 1px solid #999; padding: 8px;"">{transaction.ClientName}</td>
                         <td style=""border: 1px solid #999; padding: 8px;"">{transaction.Account?.AccountNumber}</td>
                         <td style=""border: 1px solid #999; padding: 8px;"">{transaction.Account?.AccountType}</td>

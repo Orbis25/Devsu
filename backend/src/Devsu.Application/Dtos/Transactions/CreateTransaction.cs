@@ -1,3 +1,5 @@
+using Devsu.Application.Dtos.Accounts;
+
 namespace Devsu.Application.Dtos.Transactions;
 
 public class CreateTransaction

@@ -15,7 +15,7 @@ public class AccountRepository : BaseRepository<ApplicationDbContext,Account>, I
         Expression<Func<Account, bool>>? expression = default,
         CancellationToken cancellationToken = default)
     {
-        var results = GetAll(expression);
+        var results = GetAll(expression).Include(x => x.User).OrderByDescending(x => x.CreatedAt).AsQueryable();
 
         if (!string.IsNullOrEmpty(paginate.Query))
         {
@@ -23,10 +23,11 @@ public class AccountRepository : BaseRepository<ApplicationDbContext,Account>, I
 
             results = results.Where(x => x.AccountType!.ToLower().Contains(paginate.Query) ||
                                          (!string.IsNullOrEmpty(x.AccountNumber) && x.AccountNumber.ToLower().Contains(paginate.Query)) ||
-                                         x.DailyDebitLimit.ToString(CultureInfo.CurrentCulture).Contains(paginate.Query) || 
-                                         x.DailyDebit.ToString(CultureInfo.CurrentCulture).Contains(paginate.Query) || 
-                                         x.CurrentBalance.ToString(CultureInfo.CurrentCulture).Contains(paginate.Query) || 
-                                         x.InitialBalance.ToString(CultureInfo.CurrentCulture).Contains(paginate.Query)
+                                         x.DailyDebitLimit.ToString().Contains(paginate.Query) || 
+                                         x.DailyDebit.ToString().Contains(paginate.Query) || 
+                                         x.CurrentBalance.ToString().Contains(paginate.Query) || 
+                                         x.InitialBalance.ToString().Contains(paginate.Query) ||
+                                         (x.User != null && !string.IsNullOrEmpty(x.User.Name) && x.User.Name.ToLower().Contains(paginate.Query))
                                          );
             
         }
