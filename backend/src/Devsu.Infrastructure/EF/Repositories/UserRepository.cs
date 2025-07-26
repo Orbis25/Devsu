@@ -13,21 +13,22 @@ public class UserRepository : BaseRepository<ApplicationDbContext, User>, IUserR
         Expression<Func<User, bool>>? expression = null,
         CancellationToken cancellationToken = default)
     {
-        var results = GetAll(expression);
+        var results = GetAll(expression)
+            .OrderByDescending(x => x.CreatedAt).AsQueryable();
 
         if (!string.IsNullOrEmpty(paginate.Query))
         {
-            paginate.Query = paginate.Query.ToLowerInvariant();
+            paginate.Query = paginate.Query.ToLower();
 
-            results = results.Where(x => x.Name!.ToLowerInvariant().Contains(paginate.Query) ||
-                                         x.ClientId!.ToLowerInvariant().Contains(paginate.Query) ||
+            results = results.Where(x => x.Name!.ToLower().Contains(paginate.Query) ||
+                                         x.ClientId!.ToLower().Contains(paginate.Query) ||
                                          x.Age.ToString().Contains(paginate.Query) ||
-                                         x.Gender!.ToLowerInvariant().Contains(paginate.Query) ||
-                                         x.Identification!.ToLowerInvariant().Contains(paginate.Query) ||
+                                         x.Gender!.ToLower().Contains(paginate.Query) ||
+                                         x.Identification!.ToLower().Contains(paginate.Query) ||
                                          (!string.IsNullOrEmpty(x.Phone) &&
-                                          x.Phone.ToLowerInvariant().Contains(paginate.Query)) ||
+                                          x.Phone.ToLower().Contains(paginate.Query)) ||
                                          (!string.IsNullOrEmpty(x.Address) &&
-                                          x.Address.ToLowerInvariant().Contains(paginate.Query)));
+                                          x.Address.ToLower().Contains(paginate.Query)));
         }
 
 

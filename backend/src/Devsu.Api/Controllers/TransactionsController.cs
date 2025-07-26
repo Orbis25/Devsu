@@ -72,7 +72,7 @@ public class TransactionsController : CoreController<ITransactionService, GetTra
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Report([FromQuery]SearchTransactions search, CancellationToken cancellationToken = default)
     {
-        var result = await _service.SearchAsync<ExportTransactionSearchResponse>(search, cancellationToken);
+        var result = await _service.SearchAsync<GetTransaction>(search, cancellationToken);
         if (!result.IsSuccess) return BadRequest(result);
 
         return Ok(result);
@@ -87,7 +87,22 @@ public class TransactionsController : CoreController<ITransactionService, GetTra
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> ReportPdf([FromQuery]ExportTransactionsSearch search, CancellationToken cancellationToken = default)
     {
-        var result = await _service.ExportTransactionReportAsync(search, cancellationToken);
+        var result = await _service.ExportTransactionReportAsync(search,cancellationToken:cancellationToken);
+        if (!result.IsSuccess) return BadRequest(result);
+
+        return Ok(result);
+    }
+    
+    /// <summary>
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("report/json")]
+    [ProducesResponseType(typeof(Response), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ReportJson([FromQuery]ExportTransactionsSearch search, CancellationToken cancellationToken = default)
+    {
+        var result = await _service.ExportTransactionReportAsync(search,false, cancellationToken);
         if (!result.IsSuccess) return BadRequest(result);
 
         return Ok(result);

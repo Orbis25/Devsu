@@ -71,9 +71,11 @@ public class AccountService : BaseService<Account, GetAccount, IAccountRepositor
                     return new() { Message = "Cuenta con este numero ya existe" };
                 }
             }
-
+            
             account.AccountNumber = input.AccountNumber;
             account.AccountType = input.AccountType;
+            account.InitialBalance = input.InitialBalance;
+            account.UserId = input.UserId;
 
             await _repository.UpdateAsync(account, cancellationToken).ConfigureAwait(false);
 

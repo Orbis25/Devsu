@@ -7,6 +7,7 @@ public class GetAccount
     public string? AccountType { get; set; }
     public decimal InitialBalance { get; set; }
     public decimal CurrentBalance { get; set; }
-    public User? User { get; set; }
+    public decimal DailyDebitLimit { get; set; } 
+    public GetUser? User { get; set; }
     public Guid UserId { get; set; }
 }

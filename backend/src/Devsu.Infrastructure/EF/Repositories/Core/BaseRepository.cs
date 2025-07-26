@@ -101,7 +101,7 @@ public abstract class BaseRepository<TContext, TModel> : IBaseRepository<TModel>
         return await result.AnyAsync(cancellationToken);
     }
 
-    public Task<TModel?> GetOneAsync(Expression<Func<TModel, bool>> expression, CancellationToken cancellationToken = default)
+    public virtual Task<TModel?> GetOneAsync(Expression<Func<TModel, bool>> expression, CancellationToken cancellationToken = default)
     {
         return _context.Set<TModel>().FirstOrDefaultAsync(expression, cancellationToken);
     }
