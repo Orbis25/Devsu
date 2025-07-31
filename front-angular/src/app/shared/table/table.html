@@ -1,0 +1,43 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let col of getColumns()">{{ col.label }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let row of data.results; let i = index"
+
+      [class.clickable]="rowClick.observers.length > 0"
+    >
+      <td *ngFor="let col of getColumns()">
+        <ng-container *ngIf="col.render; else defaultRender">
+            <div >
+              <div>
+              <button class="btn-edit" (click)="handleActionClick('edit', row)" data-action="edit">Editar</button>
+              <button class="btn-delete" (click)="handleActionClick('delete', row)" data-action="delete">Eliminar</button>
+              </div>
+            </div>
+        </ng-container>
+        <ng-template #defaultRender>
+          {{ renderCell(col, row) }}
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<span>
+  Mostrando {{ data.total }} resultados, {{ data.qyt }} por página
+</span>
+<br />
+<div class="pagination">
+  <button
+    *ngFor="let page of paginationButtons"
+    (click)="handleChangePage(page)"
+    [class.active]="currentPage === page"
+    class="pagination-button"
+  >
+    {{ page }}
+  </button>
+</div>

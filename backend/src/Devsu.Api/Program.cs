@@ -1,5 +1,10 @@
+using System;
 using System.Reflection;
 using Devsu.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 IronPdf.License.LicenseKey = Environment.GetEnvironmentVariable("LICENSE_KEY") ?? throw new InvalidOperationException("License key is not set in environment variables.");
 

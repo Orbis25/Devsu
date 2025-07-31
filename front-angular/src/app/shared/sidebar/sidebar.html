@@ -1,0 +1,22 @@
+<aside class="sidebar">
+  <nav>
+    <ul>
+      <li [class.active]="currentUrl === '/clients'">
+        <!-- Icono y enlace para Clientes -->
+        <a routerLink="/clients">Clientes</a>
+      </li>
+      <li [class.active]="currentUrl === '/accounts'">
+        <!-- Icono y enlace para Cuentas -->
+        <a routerLink="/accounts">Cuentas</a>
+      </li>
+      <li [class.active]="currentUrl === '/movements'">
+        <!-- Icono y enlace para Movimientos -->
+        <a routerLink="/movements">Movimientos</a>
+      </li>
+      <li [class.active]="currentUrl === '/reports'">
+        <!-- Icono y enlace para Reportes -->
+        <a routerLink="/reports">Reportes</a>
+      </li>
+    </ul>
+  </nav>
+</aside>

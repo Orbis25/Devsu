@@ -1,0 +1,13 @@
+<div class="modal" *ngIf="open">
+  <div class="modal-card">
+    <h2>{{ title }}</h2>
+    <p>{{ description }}</p>
+    <button (click)="close()" class="modal-btn">
+      <!-- Icono X, se puede reemplazar con un SVG o un componente de icono -->
+      X
+    </button>
+    <div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

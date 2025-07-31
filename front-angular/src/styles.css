@@ -1,0 +1,279 @@
+:root {
+  --color-blue: #091b52;
+  --color-yellow: #ffc363;
+  --color-yellow-hover: #ffd187;
+  --color-gray: #f4f4f4;
+  --color-slate: #f5f5f5;
+  --color-black: #141414;
+  --color-background: #ffffff;
+
+  --size-header-height: 80px;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: var(--color-black);
+  font-family: "Poppins", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  min-height: calc(100vh - var(--size-header-height));
+  padding-top: var(--size-header-height);
+}
+
+.main-content {
+  padding: 2rem;
+  flex: 1;
+}
+
+/* ------------------------- header --------------------- */
+
+.header {
+  color: white;
+  padding: 0.2rem 1.2rem;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--color-gray);
+  position: fixed;
+  height: var(--size-header-height);
+  width: 100%;
+  background-color: var(--color-background);
+}
+
+.header .logo {
+  font-size: 1.8rem;
+  color: var(--color-blue);
+}
+
+/* ------------------------- sidebar --------------------- */
+
+.sidebar {
+  width: 200px;
+  border-right: 2px solid var(--color-gray);
+  padding: 1rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar ul li {
+  display: flex;
+  margin-bottom: 0.3rem;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  gap: 10px;
+}
+.sidebar ul li:hover {
+  background-color: var(--color-slate);
+}
+.sidebar ul li.active {
+  background-color: var(--color-yellow);
+}
+
+.sidebar nav a {
+  display: block;
+  text-decoration: none;
+  color: var(--color-black);
+}
+
+/* section header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+/* ------------------------- components --------------------- */
+
+.btn {
+  background-color: var(--color-yellow);
+  border: none;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+input {
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--color-gray);
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+input:focus {
+  outline: none;
+  border-color: var(--color-yellow);
+}
+
+.text-danger{
+  color:#c20013;
+  font-size: 12px;
+}
+
+select {
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--color-gray);
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+select:focus {
+  outline: none;
+  border-color: var(--color-yellow);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+form .btn {
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background-color: var(--color-yellow-hover);
+}
+
+/* ------------------------- Table ------------------------- */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  border-bottom: 1px solid var(--color-slate);
+  padding: 8px;
+  text-align: left;
+}
+
+.table td {
+  border-bottom: 1px solid #eee;
+  padding: 15px 8px;
+}
+
+.table-row {
+  cursor: default;
+}
+
+.table-row.clickable {
+  cursor: pointer;
+}
+
+.pagination {
+  gap: 10px;
+  display: flex;
+  margin-top: 1rem;
+}
+
+.pagination-button {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.pagination-button.active {
+  background-color: var(--color-yellow);
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.table-actions button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-view {
+  background-color: var(--color-slate);
+  color: #0068d8;
+}
+
+.btn-edit {
+  background-color: var(--color-slate);
+  color: #c59400 !important;
+    border: none;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-delete {
+  background-color: var(--color-slate);
+  color: #c20013 !important;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-view:hover,
+.btn-edit:hover,
+.btn-delete:hover {
+  background-color: var(--color-yellow-hover);
+  color: #fff;
+}
+
+/* ------------------------- Modal ------------------------- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  min-width: 400px;
+  position: relative;
+}
+
+.modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-btn-delete {
+  background-color: red;
+  color: white;
+}
+.modal-btn-delete:hover {
+  background-color: darkred;
+}
