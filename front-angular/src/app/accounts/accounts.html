@@ -1,1 +1,71 @@
-<p>accounts works!</p>
+<section style="padding: 30px;">
+  <h2>Cuentas</h2>
+  <div class="section-header">
+    <input type="text" (input)="handleChangeSearch($event)" placeholder="Buscar" />
+    <button (click)="handleClickNew()" class="btn">
+      Nuevo
+    </button>
+  </div>
+  <div class="client-list">
+    <div *ngIf="isLoading" class="loading-spinner">Cargando...</div>
+
+    <ng-container *ngIf="!isLoading && data">
+      <app-table
+        [columns]="columns"
+        [data]="data"
+        [currentPage]="data.actualPage"
+        (changePage)="handleChangePage($event)"
+        (actionClick)="handleTableAction($event)"
+      ></app-table>
+    </ng-container>
+  </div>
+  <app-modal [open]="showForm" (onClose)="onCloseModal()">
+    <div class="modal-content">
+      <h2>{{ editId ? 'Editar Cuenta' : 'Nueva Cuenta' }}</h2>
+      <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="accountNumber">No. de cuenta:</label>
+          <input
+            type="text"
+            id="accountNumber"
+            formControlName="accountNumber"
+            placeholder="Numero de cuenta"
+          />
+          <div *ngIf="accountForm.get('accountNumber')?.invalid && accountForm.get('accountNumber')?.touched" class="error-message">
+            No. de cuenta es requerido.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="accountType">Tipo de cuenta:</label>
+          <select id="accountType" formControlName="accountType">
+            <option value="ahorros">Ahorros</option>
+            <option value="corriente">Corriente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="initialBalance">Balance Inicial:</label>
+          <input
+            type="number"
+            id="initialBalance"
+            formControlName="initialBalance"
+            placeholder="Balance inicial de la cuenta"
+          />
+          <div *ngIf="accountForm.get('initialBalance')?.invalid && accountForm.get('initialBalance')?.touched" class="error-message">
+            Balance Inicial es requerido y debe ser un número.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="userId">Cliente:</label>
+          <select id="userId" formControlName="userId">
+            <option value="">Seleccione un cliente</option>
+            <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+          </select>
+          <div *ngIf="accountForm.get('userId')?.invalid && accountForm.get('userId')?.touched" class="error-message">
+            Cliente es requerido.
+          </div>
+        </div>
+        <button type="submit" class="btn">Guardar</button>
+      </form>
+    </div>
+  </app-modal>
+</section>

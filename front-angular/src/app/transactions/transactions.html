@@ -1,1 +1,110 @@
-<p>transactions works!</p>
+<section style="padding: 30px;">
+  <h2>{{ title }}</h2>
+  <div class="section-header">
+    <ng-container *ngIf="report; else transactionControls">
+      <input
+        type="date"
+        [value]="searchParams.get('from') || ''"
+        (change)="setSearchParam('from', $event.target.value)"
+      />
+      <input
+        type="date"
+        [value]="searchParams.get('to') || ''"
+        (change)="setSearchParam('to', $event.target.value)"
+      />
+      <button (click)="handleOnClickFilter()" class="btn">
+        Filtrar
+      </button>
+
+      <button
+        *ngIf="searchParams.get('from') && searchParams.get('to')"
+        (click)="handleOnClickClear()"
+        class="btn"
+        style="background: red; color: white;"
+      >
+        Limpiar
+      </button>
+
+      <button
+        (click)="handleClickExport('pdf')"
+        class="btn"
+        style="background: green; color: white;"
+      >
+        PDF
+      </button>
+
+      <button
+        (click)="handleClickExport('json')"
+        class="btn"
+        style="background: green; color: white;"
+      >
+        JSON
+      </button>
+    </ng-container>
+
+    <ng-template #transactionControls>
+      <input
+        type="text"
+        (input)="handleChangeSearch($event)"
+        placeholder="Buscar"
+      />
+      <button (click)="openModal()" class="btn">
+        Nuevo
+      </button>
+    </ng-template>
+  </div>
+
+  <div class="client-list">
+    <div *ngIf="isLoading" class="loading-spinner">Cargando...</div>
+
+    <ng-container *ngIf="!isLoading && data">
+      <app-table
+        [hideActions]="report"
+        [columns]="columns"
+        [data]="data"
+        [currentPage]="data.actualPage"
+        (changePage)="handleChangePage($event)"
+        (actionClick)="handleTableAction($event)"
+      ></app-table>
+    </ng-container>
+  </div>
+
+  <app-modal [open]="showForm" (onClose)="onCloseModal()" title="{{ editId ? 'Editar Movimiento' : 'Agregar Movimiento' }}" description="Ingrese los datos">
+    <div class="modal-content">
+      <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="accountId">Cuenta:</label>
+          <select id="accountId" formControlName="accountId">
+            <option value="">Seleccione la cuenta</option>
+            <option *ngFor="let account of accounts" [value]="account.id">
+              {{ account.accountNumber }} - {{ account.user?.name }}
+            </option>
+          </select>
+          <div *ngIf="transactionForm.get('accountId')?.invalid && transactionForm.get('accountId')?.touched" class="error-message">
+            Cuenta es requerida.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="amount">Monto:</label>
+          <input
+            type="number"
+            id="amount"
+            formControlName="amount"
+            placeholder="Ingrese el monto del movimiento"
+          />
+          <div *ngIf="transactionForm.get('amount')?.invalid && transactionForm.get('amount')?.touched" class="error-message">
+            Monto es requerido y debe ser un número positivo.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="type">Tipo:</label>
+          <select id="type" formControlName="type">
+            <option value="credito">Credito</option>
+            <option value="debito">Debito</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Guardar</button>
+      </form>
+    </div>
+  </app-modal>
+</section>

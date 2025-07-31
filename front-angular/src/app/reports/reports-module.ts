@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Reports } from './reports';
+import { TransactionsModule } from '../transactions/transactions-module';
 
 
 
@@ -9,7 +10,8 @@ import { Reports } from './reports';
     Reports
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule, TransactionsModule
+  ],
+  exports:[Reports]
 })
 export class ReportsModule { }

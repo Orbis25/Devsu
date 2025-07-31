@@ -45,6 +45,7 @@ export class Users implements OnInit {
     {
       key: 'actions',
       label: 'Acciones',
+      isButtons:true,
       render: (value: unknown, row: GetUser) => `
        <div>
         <button class="btn-edit" data-action="edit" data-id="${row.id}">Editar</button>

@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Transactions } from './transactions';
+import { TransactionsComponent } from './transactions.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared-module';
 
 
 
 @NgModule({
   declarations: [
-    Transactions
+    TransactionsComponent
   ],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule],
+
+ exports:[TransactionsComponent]
 })
 export class TransactionsModule { }

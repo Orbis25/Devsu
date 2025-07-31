@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Users } from './users/users';
-import { Transactions } from './transactions/transactions';
+import { TransactionsComponent } from './transactions/transactions.component';
 import { Accounts } from './accounts/accounts';
 import { Reports } from './reports/reports';
 
@@ -11,7 +11,7 @@ export const routes: Routes = [
   },
   {
     path: 'movements',
-    component: Transactions,
+    component: TransactionsComponent,
   },
   {
     path: 'accounts',

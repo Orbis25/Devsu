@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 export interface Column<T> {
   key: keyof T | 'actions';
   label: string;
+  isButtons?:boolean
   render?: (value: unknown, row: T) => any;
 }
 
@@ -20,6 +21,7 @@ export class TableComponent<T> {
   @Input() data: IPaginationResult<T> = { results: [], total: 0, pageTotal: 0, qyt: 0, actualPage:0 };
   @Input() currentPage: number = 1;
   @Input() hideActions: boolean = false;
+  @Input() isButtons: boolean = false;
   @Output() rowClick = new EventEmitter<T>();
   @Output() changePage = new EventEmitter<number>();
   @Output() actionClick = new EventEmitter<{ action: string, row: T }>();

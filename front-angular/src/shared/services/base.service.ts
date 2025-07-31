@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPaginate, IPaginationResult } from "../interfaces/pagination.interface";
 import { environment } from '../../environment';
@@ -23,9 +23,8 @@ export interface BaseResponse<T> extends BaseResponseCore {
 })
 export class BaseService {
   baseEndpoint: string;
-
-  constructor(private http: HttpClient, baseEndpoint: Endpoint) {
-    this.baseEndpoint = `${environment.apiUrl}/api/${baseEndpoint}`;
+  constructor(private http: HttpClient, @Inject('action') action: Endpoint) {
+    this.baseEndpoint = `${environment.apiUrl}/api/${action}`;
   }
 
   post<TInput, TResponse>(
