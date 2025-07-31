@@ -86,11 +86,12 @@ dotnet ef database update
 dotnet run
 ```
 
-### 3. Configurar el Frontend
+### 3. Configurar el Frontend angular / react
 
 1. **Navegar al directorio del frontend:**
 ```bash
-cd front
+cd front en react
+cd front-angular en angular
 ```
 
 2. **Instalar dependencias:**
@@ -100,7 +101,8 @@ npm install
 
 3. **Ejecutar en modo desarrollo:**
 ```bash
-npm run dev
+npm run dev react
+ng s en angular
 ```
 
 El frontend estará disponible en `http://localhost:5173`
@@ -139,10 +141,19 @@ environment:
 
 LICENSE_KEY : importante esta key va a caducar en los proximos 20 dias
 
-### Frontend
+### Frontend react + typescript
 El frontend utiliza Vite para la configuración de entornos. Los archivos de configuración están en:
 - `vite.config.ts`
 - `src/config/axios.config.ts`
+
+### Frontend angular + typescript
+El frontend utiliza Angular CLI para la configuración de entornos. Los archivos de configuración están en:
+
+- `angular.json`
+- `src/environments/environment.ts`
+
+
+
 
 ## 🧪 Ejecutar Tests
 
