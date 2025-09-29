@@ -2,6 +2,7 @@
 using Devsu.Application.Jobs;
 using Devsu.Application.Services.Core.Pdf;
 using Devsu.Application.Services.Transactions;
+using Devsu.Infrastructure.Middlewares;
 
 namespace Devsu.Infrastructure.Extensions;
 
@@ -22,6 +23,8 @@ public static class InfrastructureExtensions
             .ConfigurePdf()
             .AddAutoMapper(typeof(UserMapper).Assembly);
 
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
         services.AddHostedService<DailyLimitBackgroundService>();
         
         return services;
@@ -31,6 +34,7 @@ public static class InfrastructureExtensions
     {
         app.UseHttpsRedirection();
         app.UseCors();
+        app.UseExceptionHandler();
         return app;
     }
 
