@@ -1,4 +1,4 @@
-# Devsu App - Aplicación Bancaria
+# Devsu App - Aplicación Bancaria (PRUEBA TECNICA)
 
 Esta es una aplicación bancaria completa desarrollada con .NET 8 (Backend) y React + TypeScript (Frontend) que permite gestionar usuarios, cuentas y transacciones bancarias.
 
